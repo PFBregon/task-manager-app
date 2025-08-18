@@ -1,0 +1,23 @@
+meta {
+  name: Marcar una tarea como completada
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://localhost:5050/api/tasks/1
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {}
+}
+
+settings {
+  encodeUrl: true
+}

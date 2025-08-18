@@ -1,0 +1,24 @@
+meta {
+  name: Añadir nueva tarea
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:5050/api/tasks
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+  "title": "Practicar APIs con Express" }
+}
+
+settings {
+  encodeUrl: true
+}

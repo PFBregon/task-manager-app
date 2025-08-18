@@ -1,0 +1,19 @@
+meta {
+  name: Obtener todas las tareas
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:5050/api/tasks
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {}
+}
+
+settings {
+  encodeUrl: true
+}
