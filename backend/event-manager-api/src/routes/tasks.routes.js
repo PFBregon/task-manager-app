@@ -7,7 +7,7 @@ let tasks = [
     { id: 2, title: "Configurar Express", completed: true },
 ]
 
-router.get('/tasks', (req, res) => {
+router.get('/tasks', async (req, res) => {
     try {
     const tasks = await Task.find();
     res.json(tasks);
@@ -17,7 +17,7 @@ router.get('/tasks', (req, res) => {
 }
 });
 
-router.post('/tasks', (req, res) => {
+router.post('/tasks', async (req, res) => {
     try{
     const { title } = req.body;
     if (!title) return res.status(400).json({ error: "El título es obligatorio" });
@@ -29,7 +29,7 @@ router.post('/tasks', (req, res) => {
 }
 });
 
-router.put('/tasks/:id', (req, res) => {
+router.put('/tasks/:id', async (req, res) => {
     try{
     const { id } = req.params;
     const task = await Task.findById(id);
@@ -44,7 +44,7 @@ router.put('/tasks/:id', (req, res) => {
     }
 });
 
-router.delete('/tasks/:id', (req, res) => {
+router.delete('/tasks/:id', async (req, res) => {
     try{
     const { id } = req.params;
     await Task.findByIdAndDelete(id);
