@@ -13,7 +13,7 @@ import { TareasPage } from './tareas.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    TareasPageRoutingModule
+    TareasPageRoutingModule,
   ],
   declarations: [TareasPage]
 })
