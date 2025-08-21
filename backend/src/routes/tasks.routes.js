@@ -1,32 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const Task = require('../models/tasks');
+const authMiddleware = require('../middlewares/auth.middleware');
 
 let tasks = [
     { id: 1, title: "Aprender Node.js", completed: false },
     { id: 2, title: "Configurar Express", completed: true },
 ]
 
-router.get('/tasks', async (req, res) => {
-    try {
-    const tasks = await Task.find();
+router.get('/', authMiddleware, async (req, res) => {
+    const tasks = await Task.find({ userId: req.userId });
     res.json(tasks);
-    } catch (error) {
-    res.status(500).json({ error: 'Error al obtener tareas'
-});
-}
 });
 
-router.post('/tasks', async (req, res) => {
-    try{
+router.post('/', authMiddleware, async (req, res) => {
     const { title } = req.body;
-    if (!title) return res.status(400).json({ error: "El título es obligatorio" });
-    const newTask = new Task({ title});
-    await newTask.save();
-    res.json(newTask);
-    } catch (error) {
-    res.status(500).json({ error: 'Error al crear tarea' });
-}
+    const task = new Task({ title, completed: false, userId: req.userId });
+    await task.save();
+    res.status(201).json(task);
 });
 
 router.put('/tasks/:id', async (req, res) => {
