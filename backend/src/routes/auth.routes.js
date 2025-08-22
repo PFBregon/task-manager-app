@@ -12,7 +12,7 @@ router.post('/register', async (req, res) => {
         const user = new User({ username, password });
         await user.save();
         res.status(201).json({ message: 'Usuario creado' });
-        } catch (error) {
+    } catch (error) {
         res.status(400).json({ error: 'El usuario ya existe' });
         }
 });

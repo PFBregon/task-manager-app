@@ -8,18 +8,21 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () =>
-      import('./pages/home/home.module').then(m => m.HomePageModule),
+      import('./pages/home/home.module').then(m =>
+        m.HomePageModule),
     canActivate: [AuthGuard]
   },
   {
     path: 'login',
     loadChildren: () =>
-      import('./pages/login/login.module').then(m => m.LoginPageModule)
+      import('./pages/login/login.module').then(m =>
+         m.LoginPageModule)
   },
   {
     path: 'tareas',
     loadChildren: () =>
-      import('./pages/tareas/tareas.module').then(m => m.TareasPageModule),
+      import('./pages/tareas/tareas.module').then(m =>
+         m.TareasPageModule),
     canActivate: [AuthGuard]
   }
 ];

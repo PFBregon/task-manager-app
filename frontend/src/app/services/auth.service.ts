@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +23,8 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, { username, password })
-      .pipe(
+    return this.http.post<{ token: string
+    }>(`${this.apiUrl}/login`, { username, password }).pipe(
         tap(response => {
           localStorage.setItem('token', response.token);
           this.authState.next(true);

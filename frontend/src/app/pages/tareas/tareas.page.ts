@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-tareas',
@@ -6,10 +7,37 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tareas.page.scss'],
 })
 export class TareasPage implements OnInit {
+  tasks: any[] = [];
+  newTaskTitle: string = '';
 
-  constructor() { }
+  constructor(private taskService: TaskService) { }
 
   ngOnInit() {
+    this.loadTasks();
+  }
+
+  loadTasks() {
+    this.taskService.getTasks().subscribe((tasks) => {
+      this.tasks = tasks;
+    });
+  }
+
+  addTask() {
+    if (this.newTaskTitle.trim() === '') return;
+    this.taskService.addTask(this.newTaskTitle).subscribe(task => {
+      this.tasks.push(task);
+      this.newTaskTitle = '';
+    });
+  }
+
+  toggleTask(task: any) {
+    this.taskService.updateTask(task._id, task.completed).subscribe();
+  }
+
+  deleteTask(id: string) {
+    this.taskService.deleteTask(id).subscribe(() => {
+      this.tasks = this.tasks.filter(t => t.id !== id);
+    });
   }
 
 }
