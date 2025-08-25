@@ -1,0 +1,15 @@
+ion-item.completed ion-label {
+  text-decoration: line-through;
+  color: gray;
+}
+
+ion-button {
+  border-radius: 12px;
+}
+
+ion-list {
+  margin-top: 1rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}

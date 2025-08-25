@@ -8,20 +8,28 @@ let tasks = [
     { id: 2, title: "Configurar Express", completed: true },
 ]
 
-router.get('/', authMiddleware, async (req, res) => {
+router.get('/tasks', authMiddleware, async (req, res) => {
+  try {
     const tasks = await Task.find({ userId: req.userId });
     res.json(tasks);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al obtener tareas' });
+  }
 });
 
-router.post('/', authMiddleware, async (req, res) => {
+router.post('/tasks', authMiddleware, async (req, res) => {
+  try {
     const { title } = req.body;
     const task = new Task({ title, completed: false, userId: req.userId });
     await task.save();
     res.status(201).json(task);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al crear la tarea' });
+  }
 });
 
-router.put('/tasks/:id', async (req, res) => {
-    try{
+router.put('/tasks/:id', authMiddleware, async (req, res) => {
+  try {
     const { id } = req.params;
     const task = await Task.findById(id);
     if (!task) return res.status(404).json({ error: "Tarea no encontrada" });
