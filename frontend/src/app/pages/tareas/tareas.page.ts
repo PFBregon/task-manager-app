@@ -10,14 +10,14 @@ export class TareasPage implements OnInit {
   tasks: any[] = [];
   newTaskTitle: string = '';
 
-  constructor(private taskService: TaskService) { }
+  constructor(private taskService: TaskService) {}
 
   ngOnInit() {
     this.loadTasks();
   }
 
   loadTasks() {
-    this.taskService.getTasks().subscribe((tasks) => {
+    this.taskService.getTasks().subscribe(tasks => {
       this.tasks = tasks;
     });
   }
@@ -31,13 +31,15 @@ export class TareasPage implements OnInit {
   }
 
   toggleTask(task: any) {
-    this.taskService.updateTask(task._id, task.completed).subscribe();
+    this.taskService.updateTask(task._id, { completed: !task.completed })
+      .subscribe(updated => {
+        task.completed = updated.completed;
+      });
   }
 
   deleteTask(id: string) {
     this.taskService.deleteTask(id).subscribe(() => {
-      this.tasks = this.tasks.filter(t => t.id !== id);
+      this.tasks = this.tasks.filter(t => t._id !== id);
     });
   }
-
 }

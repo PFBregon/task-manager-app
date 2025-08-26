@@ -8,6 +8,8 @@ export interface Task {
   _id?: string;
   title: string;
   completed: boolean;
+  categoria?: string;
+  prioridad?: string;
 }
 
 @Injectable({
@@ -18,32 +20,31 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
 
+  private getAuthHeaders(): HttpHeaders {
+    return new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('token') || ''}`
+    );
+  }
+
   getTasks(): Observable<Task[]> {
-    const headers = new HttpHeaders().set('Authorization',
-      `Bearer ${localStorage.getItem('token')}`);
-    return this.http.get<Task[]>(this.apiUrl, { headers });
+    return this.http.get<Task[]>(this.apiUrl, { headers: this.getAuthHeaders() });
   }
 
   addTask(title: string): Observable<Task> {
-  const headers = new HttpHeaders().set('Authorization',
-    `Bearer ${localStorage.getItem('token')}`);
-  return this.http.post<Task>(this.apiUrl, { title }, { headers });
+    return this.http.post<Task>(this.apiUrl, { title }, { headers: this.getAuthHeaders() });
   }
 
   toggleTask(id: string): Observable<Task> {
-    return this.http.put<Task>(`${this.apiUrl}/${id}`, {});
-
+    return this.http.put<Task>(`${this.apiUrl}/${id}`, {}, { headers: this.getAuthHeaders() });
   }
 
-  updateTask(id: string, completed: boolean): Observable<Task> {
-    const headers = new HttpHeaders().set('Authorization',
-      `Bearer ${localStorage.getItem('token')}`);
-    return this.http.put<Task>(`${this.apiUrl}/${id}`, {}, { headers });
-  }
+  updateTask(id: string, data: { completed: boolean }): Observable<Task> {
+  return this.http.put<Task>(`${this.apiUrl}/${id}`, data, { headers: this.getAuthHeaders() });
+}
+
 
   deleteTask(id: string): Observable<any> {
-  const headers = new HttpHeaders().set('Authorization',
-    `Bearer ${localStorage.getItem('token')}`);
-  return this.http.delete(`${this.apiUrl}/${id}`, { headers });
+    return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
   }
 }

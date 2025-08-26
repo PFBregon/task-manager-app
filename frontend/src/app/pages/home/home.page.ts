@@ -21,7 +21,8 @@ export class HomePage implements OnInit {
   }
 
   loadTasks() {
-    this.taskService.getTasks().subscribe(tasks => this.tasks = tasks);
+    this.taskService.getTasks().subscribe(tasks =>
+      this.tasks = tasks.sort((a, b) => Number(a.completed) - Number(b.completed)));
   }
 
   addTask() {

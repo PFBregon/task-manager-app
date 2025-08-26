@@ -1,0 +1,47 @@
+ion-list {
+  margin: 12px 12px;
+  border-radius: 12px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+}
+
+ion-item h2 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+ion-item.prioridad-alta {
+  --background: #f5c27f;
+  border-radius: 16px;
+  padding: 2px;
+  box-sizing: border-box;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+ion-item.prioridad-media {
+  --background: #f5eeae;
+  border-radius: 16px;
+  padding: 2px;
+  box-sizing: border-box;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+ion-item.prioridad-baja {
+  --background: #a5d6a7;
+  border-radius: 16px;
+  padding: 2px;
+  box-sizing: border-box;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+ion-item.completed {
+  --background: #d4cece;
+  border-radius: 16px;
+  padding: 2px;
+  box-sizing: border-box;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}

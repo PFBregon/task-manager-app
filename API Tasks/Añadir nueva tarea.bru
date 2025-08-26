@@ -7,16 +7,22 @@ meta {
 post {
   url: http://localhost:5050/api/tasks
   body: json
-  auth: inherit
+  auth: bearer
 }
 
 headers {
   Content-Type: application/json
 }
 
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4NWJhY2JjNDdlZmJiMWY3OWZlYTciLCJpYXQiOjE3NTYxNDM5ODAsImV4cCI6MTc1NjE0NzU4MH0._Ez5fkrNR9PLjG59ZZRLR_xQU-SySXrYQ7lhNCsfck8
+}
+
 body:json {
   {
-  "title": "Practicar APIs con Express" }
+    "title": "Comprobar que funciona Bruno"
+  }
+  
 }
 
 settings {
