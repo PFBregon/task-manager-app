@@ -21,9 +21,18 @@ export class HomePage implements OnInit {
   }
 
   loadTasks() {
-    this.taskService.getTasks().subscribe(tasks =>
-      this.tasks = tasks.sort((a, b) => Number(a.completed) - Number(b.completed)));
-  }
+  this.taskService.getTasks().subscribe(tasks => {
+    const prioridadOrden = { 'alta': 0, 'media': 1, 'baja': 2 };
+    this.tasks = tasks.sort((a, b) => {
+      if (a.completed !== b.completed) {
+        return Number(a.completed) - Number(b.completed);
+      }
+      const prioridadA = prioridadOrden[a.prioridad as keyof typeof prioridadOrden] ?? prioridadOrden['media'];
+      const prioridadB = prioridadOrden[b.prioridad as keyof typeof prioridadOrden] ?? prioridadOrden['media'];
+      return prioridadA - prioridadB;
+    });
+  });
+}
 
   addTask() {
     if (!this.newTaskTitle.trim()) return;
