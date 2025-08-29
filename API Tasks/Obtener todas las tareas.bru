@@ -5,9 +5,13 @@ meta {
 }
 
 get {
-  url: http://localhost:5050/api/login
+  url: http://localhost:5050/api/tasks
   body: json
-  auth: inherit
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGE4NWJhY2JjNDdlZmJiMWY3OWZlYTciLCJpYXQiOjE3NTYxOTM2MTgsImV4cCI6MTc1NjE5NzIxOH0.qxGlevjz-RrvcBuidSP0iNnzDNOW5Epj5bqnRxZGs4Y
 }
 
 body:json {

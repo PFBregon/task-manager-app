@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import {HttpHeaders } from '@angular/common/http';
 
 export interface Task {
   _id?: string;
@@ -20,10 +19,10 @@ export class TaskService {
 
   constructor(private http: HttpClient) { }
 
-  private getAuthHeaders(): HttpHeaders {
+ private getAuthHeaders() {
     return new HttpHeaders().set(
       'Authorization',
-      `Bearer ${localStorage.getItem('token') || ''}`
+      `Bearer ${localStorage.getItem('token')}`
     );
   }
 

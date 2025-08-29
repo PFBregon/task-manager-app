@@ -3,6 +3,12 @@ const router = express.Router();
 const Task = require('../models/tasks');
 const authMiddleware = require('../middleware/auth.middleware');
 const OpenAI = require("openai");
+require('dotenv').config();
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY, 
+});
+
 
 async function clasificarTarea(descripcion) {
     console.log("Entrando en clasificarTarea con:", descripcion);
